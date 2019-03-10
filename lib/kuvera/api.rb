@@ -1,4 +1,6 @@
-require "kuvera/api/version"
+# frozen_string_literal: true
+
+require 'kuvera/api/version'
 
 module Kuvera
   module Api
