@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 RSpec.describe Kuvera::Api do
-  it 'has a version number' do
-    expect(Kuvera::Api::VERSION).not_to be nil
-  end
+  let(:client) { instance_double(Kuvera::Api::Client) }
+  let(:address) { '0x1234abcd' }
+  let(:response) { :response }
 
-  it 'does something useful' do
-    expect(true).to eq(true)
+  it 'delegates `at` to Client' do
+    expect(Kuvera::Api::Client).to receive(:new).and_return(client)
+    expect(client).to receive(:at).with(address).and_return(response)
+
+    expect(described_class.at(address)).to eql(response)
   end
 end
