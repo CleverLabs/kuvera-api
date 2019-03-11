@@ -8,9 +8,13 @@ require 'kuvera/api/errors'
 module Kuvera
   module Api
     class Client
-      HOST = 'http://localhost:3000/'
+      HOST = 'https://kuvera.io/'
       PATH = 'at/'
       ROOT = 'secret'
+
+      def initialize(host: nil)
+        @host = host || ENV.fetch("KUVERA_API", HOST)
+      end
 
       RESPONSES = {
         200 => ->(response) { JSON.parse(response.body).fetch(ROOT) },
@@ -19,7 +23,7 @@ module Kuvera
       }.freeze
 
       def at(address)
-        response = Net::HTTP.get_response(URI.join(HOST, PATH, address))
+        response = Net::HTTP.get_response(URI.join(@host, PATH, address))
         RESPONSES.fetch(response.code.to_i).call(response)
       end
     end
