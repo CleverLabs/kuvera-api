@@ -11,7 +11,7 @@ module Kuvera
 
     module_function
 
-    def_delegators :client, :at
+    def_delegators :client, :at, :me, :upload, :share
 
     def client
       @client ||= Client.new
