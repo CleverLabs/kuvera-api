@@ -29,7 +29,7 @@ module Kuvera
       end
 
       RESPONSES = {
-        200 => ->(response) { JSON.parse(response.body).fetch(ROOT) },
+        200 => ->(response) { response.body },
         403 => ->(_response) { raise SecretAlreadyRead },
         404 => ->(_response) { raise SecretNotFound }
       }.freeze
