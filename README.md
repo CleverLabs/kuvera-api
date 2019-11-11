@@ -20,12 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-Currently this gem only supports one-time secrets receving through the `at`
-command.
+- One-time secrets receving through the `at` command.
 
 ```ruby
-Kuvera::Api.at('0x78c4e15f8f1f3e43f6950975f97ff7c2858bcc5a')
+Kuvera::Api.at('SHARE-78c4e15f8f1f3e43f6950975f97ff7c2858bcc5a')
 ```
+
+- Authentification with OAuth credentials
+```ruby
+Kuvera::Api.me
+# => {"id"=>1, "admin_id"=>2, "name"=>"Kuvera Carrier"}
+```
+
+- Secret files uploading
+```ruby
+Kuvera::Api.upload('My Passport', File.open('passport.pdf'), 'application/pdf')
+# => {"address"=>"KEY-11ff53da91ba292ef628b457895bf7ea", "status"=>"success", "title"=>"My Passport"}
+```
+
+- Secrets sharing
+```ruby
+Kuvera::Api.share('KEY-11ff53da91ba292ef628b457895bf7ea')
+# => {"path"=>"https://kuvera.io/at/SHARE-d00a96d19889639a5a5d3991c6fab49d", "status"=>"success"}
+```
+
+In order to use carrier-related methods you need to provide `OAUTH_UID` and `OAUTH_SECRET`.
 
 ## Contributing
 
