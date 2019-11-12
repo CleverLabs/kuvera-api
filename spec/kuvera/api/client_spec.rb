@@ -10,7 +10,7 @@ RSpec.describe Kuvera::Api::Client do
 
   describe '::RESPONSES' do
     it 'can process 200 response code' do
-      expect(described_class::RESPONSES[200].call(response)).to eql('value')
+      expect(described_class::RESPONSES[200].call(response)).to eql(body)
     end
 
     it 'can process 403 response code' do
